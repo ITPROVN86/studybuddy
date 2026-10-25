@@ -11,6 +11,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
 
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    /* Nút bật/tắt nhạc cố định ở góc dưới màn hình */
+    .music-toggle-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      padding: 10px 18px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .music-toggle-btn:hover {
+      background: rgba(0, 0, 0, 0.9);
+      transform: scale(1.05);
+    }
+  </style>
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -749,5 +776,67 @@
 
 
   <script src="app.js"></script>
+<!-- Thẻ Audio ẩn (lặp lại liên tục với thuộc tính loop) -->
+  <audio id="bg-audio" loop preload="auto">
+    <!-- Thay đường dẫn file nhạc của bạn ở đây -->
+    <source src="audio/background-music.mp3" type="audio/mpeg" />
+    Trình duyệt của bạn không hỗ trợ phát âm thanh.
+  </audio>
+
+  <!-- Nút điều khiển Bật/Tắt nhạc -->
+  <button id="music-btn" class="music-toggle-btn" aria-label="Bật/Tắt nhạc nền">
+    <span id="music-icon">🎵</span>
+    <span id="music-text">Bật nhạc nền</span>
+  </button>
+
+  <!-- Đoạn mã Script điều khiển -->
+  <script>
+    const audio = document.getElementById('bg-audio');
+    const musicBtn = document.getElementById('music-btn');
+    const musicIcon = document.getElementById('music-icon');
+    const musicText = document.getElementById('music-text');
+
+    // Chỉnh âm lượng mặc định vừa phải (0.0 đến 1.0)
+    audio.volume = 0.4;
+
+    let isPlaying = false;
+
+    // Hàm chuyển đổi trạng thái Bật / Tắt
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        musicIcon.textContent = '🔇';
+        musicText.textContent = 'Bật nhạc';
+        isPlaying = false;
+      } else {
+        audio.play().then(() => {
+          musicIcon.textContent = '🎵';
+          musicText.textContent = 'Tắt nhạc';
+          isPlaying = true;
+        }).catch(err => {
+          console.log("Trình duyệt chặn phát âm thanh:", err);
+        });
+      }
+    }
+
+    musicBtn.addEventListener('click', toggleMusic);
+
+    // Tự động phát ở lần tương tác đầu tiên bất kỳ trên màn hình (Click hoặc Chạm)
+    function autoPlayOnFirstClick() {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          musicIcon.textContent = '🎵';
+          musicText.textContent = 'Tắt nhạc';
+        }).catch(() => {});
+      }
+      // Hủy bỏ lắng nghe sau khi đã kích hoạt lần đầu
+      window.removeEventListener('click', autoPlayOnFirstClick);
+      window.removeEventListener('touchstart', autoPlayOnFirstClick);
+    }
+
+    window.addEventListener('click', autoPlayOnFirstClick);
+    window.addEventListener('touchstart', autoPlayOnFirstClick);
+  </script>
 </body>
 </html>
