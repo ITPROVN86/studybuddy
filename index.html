@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>StudyBuddy - Trang Chủ THPT Chuyên</title>
+  
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-lowest": "#060e20",
+            "surface-container-highest": "#2d3449",
+            "danger-rose": "#F43F5E",
+            "surface-dim": "#0b1326",
+            "background": "#0b1326",
+            "surface-bright": "#31394d",
+            "on-primary": "#3f008e",
+            "surface": "#0b1326",
+            "on-background": "#dae2fd",
+            "surface-container-low": "#131b2e",
+            "outline": "#958da1",
+            "surface-variant": "#2d3449",
+            "secondary-container": "#0053db",
+            "primary-container": "#7c3aed",
+            "streak-gold": "#F59E0B",
+            "accent-coral": "#F97316",
+            "on-surface-variant": "#ccc3d8",
+            "on-surface": "#dae2fd",
+            "secondary": "#b4c5ff",
+            "surface-container-high": "#222a3d",
+            "electric-cyan": "#06B6D4",
+            "inverse-primary": "#732ee4",
+            "primary": "#d2bbff",
+            "surface-container": "#171f33",
+            "success-emerald": "#10B981"
+          },
+          fontFamily: {
+            "body-sm": ["Plus Jakarta Sans"],
+            "display-hero": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen relative overflow-x-hidden">
+  
+  <!-- Ambient background glow -->
+  <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div class="absolute -top-40 left-1/4 h-96 w-96 rounded-full bg-primary-container/20 blur-[120px]"></div>
+    <div class="absolute top-1/3 -right-20 h-96 w-96 rounded-full bg-secondary-container/20 blur-[130px]"></div>
+  </div>
+
+  <div class="fixed top-24 right-6 z-50 flex flex-col gap-2.5 pointer-events-none" id="toast-container"></div>
+
+  
+  <!-- TOP HEADER (MASTER / RESPONSIVE) -->
+  <header class="fixed top-0 left-0 right-0 w-full z-40 bg-surface/90 backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.4)] border-b border-surface-container-high/60 transition-all">
+    <div class="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
+      
+      <!-- Logo Brand -->
+      <a class="flex items-center gap-3 group cursor-pointer flex-shrink-0" href="index.html">
+        <div class="relative flex items-center justify-center p-2 rounded-xl bg-surface-container-high shadow-[0_0_20px_rgba(124,58,237,0.45)] group-hover:scale-105 transition-transform">
+          <img alt="StudyBuddy Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjligjSlPEi_1AAFqCLNdEnKGxpK0jpoVuH3p7dewafzcqmwNSy3H3YDp8b8JieGoRfcXgz1GRwtEJxC9_2WuQ3Pn99W3S4KrIo7_KM3VKyDqu85s-kzONjgqrVi9wFqJyPR5C69aoUAct1XHhIjV0m57JwKbwl1zwH64JbQL8Q2UOv9FOzqoiCicM-5eITFSNSK4KYCp7W1dQ50EmXW1D-KO29m4_xYRlU6facvoW"/>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-[19px] font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">StudyBuddy</span>
+          <span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant">THPT Chuyên</span>
+        </div>
+      </a>
+
+      <!-- DESKTOP SPACIOUS NAVIGATION (ĐÃ CẢI THIỆN ĐỘ RỘNG RÃI, CÓ DROPDOWN CHỨC NĂNG) -->
+      <nav class="hidden lg:flex items-center gap-3 xl:gap-5" id="main-nav">
+        <a class="px-3.5 py-2 rounded-xl font-label-md text-label-md transition-all hover:text-primary text-primary bg-primary-container/20 font-bold border border-primary/20 shadow-sm" href="index.html">Trang chủ</a>
+
+        <!-- Môn học Dropdown -->
+        <div class="relative group">
+          <a class="px-3.5 py-2 rounded-xl font-label-md text-label-md transition-all hover:text-primary flex items-center gap-1.5 text-on-surface-variant hover:bg-surface-container-high" href="detail.html">
+            <span>Môn học</span>
+            <span class="material-symbols-outlined text-[16px] group-hover:rotate-180 transition-transform">expand_more</span>
+          </a>
+          <!-- Mega Menu Dropdown khi hover Môn học -->
+          <div class="absolute top-full left-0 mt-1 w-64 p-3 rounded-2xl bg-surface-container-high/95 backdrop-blur-2xl border border-white/10 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+            <span class="text-[11px] font-bold text-outline px-2 uppercase tracking-wider block mb-2">Chuyên đề 6 Môn</span>
+            <a href="detail.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-primary-container/20 text-on-surface hover:text-primary transition-colors">
+              <span class="material-symbols-outlined text-primary text-[20px]">functions</span>
+              <div class="text-left">
+                <span class="text-xs font-bold block">Toán học Chuyên</span>
+                <span class="text-[11px] text-on-surface-variant">VMO & Đề chọn đội tuyển</span>
+              </div>
+            </a>
+            <a href="detail.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-surface-variant text-on-surface hover:text-electric-cyan transition-colors">
+              <span class="material-symbols-outlined text-electric-cyan text-[20px]">blur_on</span>
+              <div class="text-left">
+                <span class="text-xs font-bold block">Vật lý Olympic</span>
+                <span class="text-[11px] text-on-surface-variant">Cơ học, điện từ vi phân</span>
+              </div>
+            </a>
+            <a href="detail.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-surface-variant text-on-surface hover:text-accent-coral transition-colors">
+              <span class="material-symbols-outlined text-accent-coral text-[20px]">science</span>
+              <div class="text-left">
+                <span class="text-xs font-bold block">Hóa học Vòng 2</span>
+                <span class="text-[11px] text-on-surface-variant">Cơ chế hữu cơ, hóa phân tích</span>
+              </div>
+            </a>
+            <a href="detail.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-surface-variant text-on-surface hover:text-success-emerald transition-colors">
+              <span class="material-symbols-outlined text-success-emerald text-[20px]">biotech</span>
+              <div class="text-left">
+                <span class="text-xs font-bold block">Sinh học Quốc gia</span>
+                <span class="text-[11px] text-on-surface-variant">Di truyền phân tử, tế bào</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a class="px-3.5 py-2 rounded-xl font-label-md text-label-md transition-all hover:text-primary text-on-surface-variant hover:bg-surface-container-high" href="index.html#interactive-quiz">Luyện Quiz</a>
+        <a class="px-3.5 py-2 rounded-xl font-label-md text-label-md transition-all hover:text-primary text-on-surface-variant hover:bg-surface-container-high" href="detail.html#section-tai-lieu">Kho tài liệu</a>
+        <a class="px-3.5 py-2 rounded-xl font-label-md text-label-md transition-all hover:text-primary text-on-surface-variant hover:bg-surface-container-high" href="detail.html#section-hoi-dap">Hỏi đáp</a>
+      </nav>
+
+      <!-- RIGHT ACTIONS (SEARCH, STREAK, NOTIFS, PROFILE, MOBILE HAMBURGER) -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <!-- Desktop Search Bar -->
+        <div class="hidden xl:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-container-low shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] w-56 border border-white/5">
+          <span class="material-symbols-outlined text-outline text-[18px]">search</span>
+          <input class="bg-transparent text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none w-full" placeholder="Tìm đề thi, tài liệu..." type="text"/>
+          <kbd class="font-label-sm text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded shadow-sm">Ctrl+K</kbd>
+        </div>
+
+        <!-- Search button for Tablet & Mobile -->
+        <button id="mobile-search-btn" class="xl:hidden p-2.5 rounded-xl bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Tìm kiếm">
+          <span class="material-symbols-outlined text-[20px]">search</span>
+        </button>
+
+        <!-- Streak Badge -->
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-streak-gold/15 border border-streak-gold/30">
+          <span class="material-symbols-outlined text-streak-gold text-[17px]">local_fire_department</span>
+          <span class="font-label-sm text-label-sm font-bold text-streak-gold">7 ngày</span>
+        </div>
+
+        <!-- Profile Avatar -->
+        <a href="detail.html" class="flex items-center gap-2.5 cursor-pointer group">
+          <div class="relative">
+            <img alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-primary/40 group-hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtQd1jxis6u07z7RGHhwqTiCk7jBIbdrTwmkVmbCbarCLi5ddpu0hg5XOL_rAsna5AJqA6HCoL3mJi4R351qtNjTm_R67UeOLJVXvllUxZA2WCkohgkLcusc1k98v-f6PfvFa01B-svYk5gXHH-HH9xnGGZ8JrtTGGdz1qp9iu2ixprlHKKdJEY5eRyO2eHi915OJiqAxB7agu_KC4giPlqA3UquYxzdPtmiu9Ys4d"/>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-success-emerald ring-2 ring-surface"></span>
+          </div>
+          <div class="hidden md:flex flex-col text-left">
+            <span class="font-label-md text-label-md font-bold text-on-surface leading-tight">Minh Anh</span>
+            <span class="font-label-sm text-[11px] text-secondary">Chuyên Toán</span>
+          </div>
+        </a>
+
+        <!-- NÚT HAMBURGER MOBILE MENU -->
+        <button id="mobile-menu-toggle" class="lg:hidden p-2.5 rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors flex items-center justify-center border border-white/10" aria-label="Mở menu chức năng">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERLAY NỀN KHI MỞ MOBILE DRAWER -->
+  <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 transition-opacity duration-300"></div>
+
+  <!-- ========================================================================= -->
+  <!-- MOBILE DRAWER MENU: HIỂN THỊ ĐẦY ĐỦ CÁC CHỨC NĂNG DÀNH CHO MOBILE         -->
+  <!-- ========================================================================= -->
+  <aside id="mobile-menu-drawer" class="hidden fixed top-0 right-0 bottom-0 w-[84vw] max-w-[340px] bg-surface-container-low/95 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-50 flex flex-col justify-between overflow-y-auto mobile-menu-animate">
+    <div>
+      <!-- Drawer Header -->
+      <div class="p-5 flex items-center justify-between border-b border-surface-variant/30 bg-surface-container/80">
+        <div class="flex items-center gap-3">
+          <img class="w-8 h-8 rounded-full object-cover ring-2 ring-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtQd1jxis6u07z7RGHhwqTiCk7jBIbdrTwmkVmbCbarCLi5ddpu0hg5XOL_rAsna5AJqA6HCoL3mJi4R351qtNjTm_R67UeOLJVXvllUxZA2WCkohgkLcusc1k98v-f6PfvFa01B-svYk5gXHH-HH9xnGGZ8JrtTGGdz1qp9iu2ixprlHKKdJEY5eRyO2eHi915OJiqAxB7agu_KC4giPlqA3UquYxzdPtmiu9Ys4d"/>
+          <div>
+            <h4 class="font-bold text-sm text-on-surface">Minh Anh</h4>
+            <span class="text-[11px] text-streak-gold flex items-center gap-1 font-semibold">
+              <span class="material-symbols-outlined text-[13px]">local_fire_department</span> Chuỗi 7 ngày học
+            </span>
+          </div>
+        </div>
+        <button id="close-mobile-menu" class="p-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-[22px]">close</span>
+        </button>
+      </div>
+
+      <!-- Danh sách chức năng trên Mobile -->
+      <div class="p-4 flex flex-col gap-1.5">
+        <span class="text-[11px] font-bold text-outline px-3 uppercase tracking-wider mb-1">Menu Chính</span>
+        
+        <!-- 1. Trang chủ -->
+        <a href="index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl font-label-md text-on-surface hover:bg-surface-container-high transition-all text-primary bg-primary-container/20 font-bold">
+          <span class="material-symbols-outlined text-primary text-[20px]">home</span>
+          <span class="font-semibold text-sm">Trang chủ</span>
+        </a>
+
+        <!-- 2. Danh mục Môn học (Click Accordion xổ ra chi tiết 6 môn) -->
+        <div>
+          <button class="mobile-accordion-toggle w-full flex items-center justify-between px-3.5 py-3 rounded-xl font-label-md text-on-surface hover:bg-surface-container-high transition-all text-left text-on-surface hover:bg-surface-container-high" data-target="submenu-monhoc">
+            <div class="flex items-center gap-3.5">
+              <span class="material-symbols-outlined text-secondary text-[20px]">auto_stories</span>
+              <span class="font-semibold text-sm">Môn học Chuyên</span>
+            </div>
+            <span class="material-symbols-outlined text-[18px] text-outline accordion-chevron transition-transform duration-200">expand_more</span>
+          </button>
+          
+          <!-- Submenu danh sách môn học -->
+          <div id="submenu-monhoc" class="mobile-submenu flex flex-col gap-1 pl-11 pr-2 py-1">
+            <a href="detail.html" class="flex items-center justify-between py-2 px-3 rounded-lg text-xs font-semibold text-primary hover:bg-primary-container/20">
+              <span>📐 Toán học (VMO)</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-primary/20">HOT</span>
+            </a>
+            <a href="detail.html" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              ⚡ Vật lý Olympic
+            </a>
+            <a href="detail.html" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              🧪 Hóa học Đội tuyển
+            </a>
+            <a href="detail.html" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              🧬 Sinh học Quốc gia
+            </a>
+            <a href="detail.html" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              ✍️ Ngữ văn Chuyên
+            </a>
+            <a href="detail.html" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              🌐 Tiếng Anh HSG & IELTS
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Luyện Quiz & Đề thi thử (Click Accordion) -->
+        <div>
+          <button class="mobile-accordion-toggle w-full flex items-center justify-between px-3.5 py-3 rounded-xl font-label-md text-on-surface hover:bg-surface-container-high transition-all text-left" data-target="submenu-quiz">
+            <div class="flex items-center gap-3.5">
+              <span class="material-symbols-outlined text-streak-gold text-[20px]">quiz</span>
+              <span class="font-semibold text-sm">Luyện Quiz & Đề thi</span>
+            </div>
+            <span class="material-symbols-outlined text-[18px] text-outline accordion-chevron transition-transform duration-200">expand_more</span>
+          </button>
+          <div id="submenu-quiz" class="mobile-submenu flex flex-col gap-1 pl-11 pr-2 py-1">
+            <a href="index.html#interactive-quiz" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              🎯 Thử sức Quiz Trực tiếp
+            </a>
+            <a href="detail.html#section-quiz" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              📝 Đề thi Chọn Đội tuyển VMO 2025
+            </a>
+            <a href="detail.html#section-quiz" class="py-2 px-3 rounded-lg text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+              ⏱ Đề thi thử Duyên Hải & Trại hè
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. Kho tài liệu & Ebook -->
+        <a href="detail.html#section-tai-lieu" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl font-label-md text-on-surface hover:bg-surface-container-high transition-all">
+          <span class="material-symbols-outlined text-electric-cyan text-[20px]">folder_special</span>
+          <span class="font-semibold text-sm">Kho tài liệu 140+ PDF</span>
+        </a>
+
+        <!-- 5. Góc Hỏi đáp & Tranh biện -->
+        <a href="detail.html#section-hoi-dap" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl font-label-md text-on-surface hover:bg-surface-container-high transition-all">
+          <span class="material-symbols-outlined text-accent-coral text-[20px]">forum</span>
+          <span class="font-semibold text-sm">Hỏi đáp & Soạn LaTeX</span>
+        </a>
+
+        <!-- 6. Kích hoạt AI Tutor 24/7 trực tiếp từ menu -->
+        <button onclick="toggleChatbot(true)" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl font-label-md text-primary bg-primary-container/20 border border-primary/30 mt-2 text-left">
+          <span class="material-symbols-outlined text-primary text-[20px]">smart_toy</span>
+          <div>
+            <span class="font-bold text-sm block">Hỏi AI Tutor 24/7</span>
+            <span class="text-[11px] text-electric-cyan font-normal">Giải đáp bổ đề, bài tập khó</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Footer Actions -->
+    <div class="p-4 border-t border-surface-variant/30 bg-surface-container/60 flex flex-col gap-2">
+      <div class="flex items-center justify-between text-xs text-outline px-1">
+        <span>StudyBuddy THPT Chuyên v4.2</span>
+        <span class="text-success-emerald font-semibold">● Online</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MODAL TÌM KIẾM NHANH CHO MOBILE & TABLET -->
+  <div id="search-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md p-4 flex-col justify-start items-center pt-16">
+    <div class="w-full max-w-lg bg-surface-container-high rounded-2xl border border-white/10 shadow-2xl p-4 flex flex-col gap-4">
+      <div class="flex items-center gap-2 border-b border-white/10 pb-3">
+        <span class="material-symbols-outlined text-outline">search</span>
+        <input id="mobile-search-input" class="w-full bg-transparent text-on-surface placeholder:text-outline text-sm focus:outline-none" placeholder="Tìm đề thi VMO, BĐT Cauchy, tài liệu..." type="text"/>
+        <button id="close-search-modal" class="p-1 rounded-lg text-outline hover:text-on-surface">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="flex flex-col gap-2 text-left">
+        <span class="text-[11px] font-bold text-outline uppercase tracking-wider">Tìm kiếm phổ biến</span>
+        <div class="flex flex-wrap gap-2">
+          <a href="detail.html" class="px-2.5 py-1 rounded-lg bg-surface-container text-xs text-on-surface hover:text-primary">Đề thi VMO 2024</a>
+          <a href="detail.html" class="px-2.5 py-1 rounded-lg bg-surface-container text-xs text-on-surface hover:text-primary">Bổ đề Mixtilinear</a>
+          <a href="detail.html" class="px-2.5 py-1 rounded-lg bg-surface-container text-xs text-on-surface hover:text-primary">Tài liệu Sinh chuyên</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <main class="w-full pt-20 bg-surface relative z-10">
+    <div class="flex flex-col w-full">
+      <!-- HERO SECTION -->
+      <section class="relative w-full overflow-hidden pb-16 pt-8 lg:pt-14 lg:pb-24">
+        <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-r from-primary-container/30 via-electric-cyan/20 to-secondary-container/25 blur-[140px] rounded-full"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div class="lg:col-span-7 flex flex-col gap-6 text-left">
+              <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container-high w-fit shadow-inner">
+                <span class="flex h-2.5 w-2.5 rounded-full bg-accent-coral animate-ping"></span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-bold">Nền tảng tri thức học thuật 2025</span>
+                <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-container/50 text-primary font-bold">V.4.2 PRO</span>
+              </div>
+              <h1 class="font-display-hero text-display-hero font-extrabold tracking-tight text-on-surface">
+                Bứt Phá Điểm Số — <br class="hidden sm:inline"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-electric-cyan to-secondary">
+                  Chinh Phục Đỉnh Cao
+                </span>
+                <span class="block text-on-surface mt-1">Học Sinh Giỏi</span>
+              </h1>
+              <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                Hệ thống ôn luyện, đề thi HSG và cộng đồng học thuật tinh hoa dành riêng cho học sinh các trường THPT Chuyên toàn quốc. Rèn luyện tư duy thực chiến cùng AI Tutor và đội ngũ Ranker hàng đầu.
+              </p>
+              <div class="flex flex-wrap items-center gap-4 pt-2">
+                <a class="group relative inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-gradient-to-r from-primary-container via-inverse-primary to-secondary-container text-on-primary font-headline-sm text-headline-sm font-bold shadow-[0_8px_28px_rgba(124,58,237,0.45)] hover:shadow-[0_12px_36px_rgba(124,58,237,0.7)] hover:-translate-y-1 active:scale-95 transition-all duration-300" href="#interactive-quiz">
+                  <span class="material-symbols-outlined text-streak-gold text-[24px]">local_fire_department</span>
+                  <span>Bắt đầu làm Quiz ngay</span>
+                  <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+                <a class="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-headline-sm font-semibold hover:bg-surface-variant hover:-translate-y-0.5 active:scale-95 transition-all shadow-md" href="detail.html">
+                  <span class="material-symbols-outlined text-secondary text-[22px]">auto_stories</span>
+                  <span>Khám phá Môn Toán Chuyên</span>
+                </a>
+              </div>
+              <div class="flex items-center gap-6 pt-4 text-on-surface-variant font-body-sm text-body-sm">
+                <div class="flex items-center -space-x-2">
+                  <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center font-bold text-on-primary text-xs shadow-md">HN</div>
+                  <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary text-xs shadow-md">SP</div>
+                  <div class="w-8 h-8 rounded-full bg-accent-coral flex items-center justify-center font-bold text-on-primary text-xs shadow-md">Ams</div>
+                  <div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-bold text-electric-cyan text-xs shadow-md">50k+</div>
+                </div>
+                <p><strong class="text-on-surface font-semibold">50,000+ Chuyên viên</strong> từ Chuyên Amsterdam, KHTN, Lê Hồng Phong, Lam Sơn đang tranh hạng.</p>
+              </div>
+            </div>
+
+            <!-- Quiz Mockup Preview -->
+            <div class="lg:col-span-5 relative flex items-center justify-center">
+              <div class="absolute w-72 h-72 rounded-full bg-gradient-to-tr from-primary-container/40 to-electric-cyan/30 blur-2xl -z-10 animate-pulse"></div>
+              <div class="relative w-full max-w-md bg-surface-container-high p-6 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+                <div class="flex items-center justify-between pb-4">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-danger-rose"></span>
+                    <span class="w-3 h-3 rounded-full bg-streak-gold"></span>
+                    <span class="w-3 h-3 rounded-full bg-success-emerald"></span>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant font-mono ml-2">HSG_QG_TOAN_2025.QUIZ</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full bg-success-emerald/20 text-success-emerald font-label-sm text-label-sm font-bold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">verified</span> PERFECT SCORE
+                  </span>
+                </div>
+                <div class="flex items-center gap-5 py-4">
+                  <div class="relative flex items-center justify-center w-24 h-24">
+                    <svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+                      <circle class="stroke-surface-container fill-none" cx="50" cy="50" r="42" stroke-width="8"></circle>
+                      <circle class="stroke-primary fill-none transition-all duration-1000" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="0" stroke-linecap="round" stroke-width="8"></circle>
+                    </svg>
+                    <div class="absolute flex flex-col items-center">
+                      <span class="font-headline-lg text-headline-lg font-extrabold text-on-surface leading-none">100</span>
+                      <span class="font-label-sm text-label-sm text-on-surface-variant font-bold">/100</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Đại Số Tổ Hợp Nâng Cao</span>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">Thời gian: <strong>14:22s</strong> (Kỷ lục khối)</span>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold">+180 EXP</span>
+                      <span class="px-2 py-0.5 rounded bg-surface-container-highest text-streak-gold font-label-sm text-label-sm font-bold flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[13px]">military_tech</span> Top 0.1%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 MÔN CHUYÊN TRỌNG TÂM (CLICK CHUYỂN SANG DETAIL.HTML) -->
+      <section class="w-full py-16 scroll-mt-24" id="six-subjects">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-10">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center gap-2 text-primary font-label-sm text-label-sm font-bold uppercase tracking-widest">
+                <span class="material-symbols-outlined text-[18px]">hub</span>
+                <span>Chương trình trọng điểm</span>
+              </div>
+              <h2 class="font-headline-lg text-headline-lg font-extrabold text-on-surface">
+                6 Môn Chuyên Trọng Tâm
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+                Ngân hàng đề thi, bài tập phân hóa cao và chuyên đề chuyên sâu biên soạn bởi các thầy cô đội tuyển Olympic.
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="detail.html" class="px-4 py-2 rounded-xl bg-primary-container text-on-primary-container font-bold text-sm hover:brightness-110 transition-all flex items-center gap-2">
+                <span>Vào chi tiết môn Toán học</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Grid 6 môn -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 1. Môn Toán học (Focal) -->
+            <a href="detail.html" class="group flex flex-col rounded-2xl bg-surface-container overflow-hidden shadow-lg hover:shadow-[0_16px_36px_rgba(124,58,237,0.35)] hover:-translate-y-2 transition-all duration-300 ring-2 ring-primary/40 cursor-pointer">
+              <div class="relative h-48 w-full overflow-hidden">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Toán học" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPkJkm399EXAUgaHQoqwtG1eg4p1uyLD81LlES5dGs8ek-8dvzrvZrfiRAfB8DMkKQpO1hr5GL_0kT-WddJn3wlB-KDI8koIqT46lZnyuYcAd09iwnKPeHnFK4n2BZes4cLMQQ293n-DhrRmf9RtTaO5ecLIxkXT6ZwPkVpZEAKxQr3j7VN-QYuBPrmc8YG1sz1YtF6KzAzuwC1JHXkAmO4CPrtfZE0kAlDHCdP_o"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+                <div class="absolute top-4 left-4 flex items-center gap-2">
+                  <div class="w-9 h-9 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+                    <span class="material-symbols-outlined text-[20px]">functions</span>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-surface-container-highest/80 backdrop-blur-md text-primary font-label-sm text-label-sm font-bold">250+ Đề thi chuyên</span>
+                </div>
+                <div class="absolute top-4 right-4">
+                  <span class="px-2.5 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary font-label-sm text-label-sm font-bold">Trọng tâm</span>
+                </div>
+              </div>
+              <div class="flex flex-col flex-1 p-6 justify-between gap-4">
+                <div>
+                  <h3 class="font-headline-md text-headline-md font-bold text-on-surface group-hover:text-primary transition-colors flex items-center justify-between">
+                    <span>Toán học</span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-primary-container/40 text-primary font-semibold">Mở trang chi tiết</span>
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-2">Giải tích chuyên sâu, số học, tổ hợp & hình học thuần túy VMO.</p>
+                </div>
+                <div class="inline-flex items-center justify-between w-full pt-3 font-label-md text-label-md font-bold text-primary group-hover:translate-x-1 transition-transform">
+                  <span>Khám phá đề thi & tài liệu Toán</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- 2. Vật lý -->
+            <a href="detail.html" class="group flex flex-col rounded-2xl bg-surface-container overflow-hidden shadow-lg hover:shadow-[0_16px_36px_rgba(6,182,212,0.3)] hover:-translate-y-2 transition-all duration-300">
+              <div class="relative h-48 w-full overflow-hidden">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Vật lý" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaAG2gEfcpZBj7Ty_f1-KRAK13wuakrm9obJrchu09cZ5u5BerdRRJPwHrev61_4Hsu9QBhQVORy7lIdMj8oF7fcQXjkZMygx3OQk573mTEu6C6XjBXI5yLJvukm8WTTXP3XdehMGuj5RKhBruM8bw_FpdNSEwzUm2VU6sjk1rx0QtYLZi-5PnEwQhPh52kiT-EYFOBEIlzQoq0PEMnY9qy4yoiU1MiLUc0cP9OwK3"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+                <div class="absolute top-4 left-4 flex items-center gap-2">
+                  <div class="w-9 h-9 rounded-xl bg-electric-cyan text-on-secondary-fixed flex items-center justify-center shadow-md">
+                    <span class="material-symbols-outlined text-[20px]">blur_on</span>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-surface-container-highest/80 backdrop-blur-md text-electric-cyan font-label-sm text-label-sm font-bold">180+ Bài tập</span>
+                </div>
+              </div>
+              <div class="flex flex-col flex-1 p-6 justify-between gap-4">
+                <div>
+                  <h3 class="font-headline-md text-headline-md font-bold text-on-surface group-hover:text-electric-cyan transition-colors">Vật lý</h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-2">Cơ học nâng cao, quang học, điện từ học & dao động phi tuyến.</p>
+                </div>
+                <div class="inline-flex items-center justify-between w-full pt-3 font-label-md text-label-md font-bold text-electric-cyan group-hover:translate-x-1 transition-transform">
+                  <span>Vào ôn tập môn Lý</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- 3. Hóa học -->
+            <a href="detail.html" class="group flex flex-col rounded-2xl bg-surface-container overflow-hidden shadow-lg hover:shadow-[0_16px_36px_rgba(249,115,22,0.3)] hover:-translate-y-2 transition-all duration-300">
+              <div class="relative h-48 w-full overflow-hidden">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Hóa học" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDENOXLLhHb7AWGzh9eVfJOKGfAfBRiT0GOmZJzApBf0IvR4IUw6n88oXSmXTjN4YthrOln8Qyc5GZY8-jttH68fQ-sVvXdF9UwtbNu8Nwgdbr_AqPWKfjBsrdIIQ6YtKLZq1XOKtdpwA_u0Uqqbw3LWQogir9ENAG29TU0iLTG4ne1YNMAOxOqmT5mLCUMTowsUhzk_61T-36IZs36SJrtw4LLyiTb05YgAewcCK7z"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+                <div class="absolute top-4 left-4 flex items-center gap-2">
+                  <div class="w-9 h-9 rounded-xl bg-accent-coral text-on-primary flex items-center justify-center shadow-md">
+                    <span class="material-symbols-outlined text-[20px]">science</span>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-surface-container-highest/80 backdrop-blur-md text-accent-coral font-label-sm text-label-sm font-bold">210+ Chuyên đề</span>
+                </div>
+              </div>
+              <div class="flex flex-col flex-1 p-6 justify-between gap-4">
+                <div>
+                  <h3 class="font-headline-md text-headline-md font-bold text-on-surface group-hover:text-accent-coral transition-colors">Hóa học</h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-2">Hóa vô cơ, chuỗi phản ứng hữu cơ phức tạp & hóa phân tích.</p>
+                </div>
+                <div class="inline-flex items-center justify-between w-full pt-3 font-label-md text-label-md font-bold text-accent-coral group-hover:translate-x-1 transition-transform">
+                  <span>Vào ôn tập môn Hóa</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- 4. Sinh học -->
+            <a href="detail.html" class="group flex flex-col rounded-2xl bg-surface-container overflow-hidden shadow-lg hover:shadow-[0_16px_36px_rgba(16,185,129,0.25)] hover:-translate-y-2 transition-all duration-300">
+              <div class="relative h-48 w-full overflow-hidden">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Sinh học" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMjPipv1fMlfbIF7fVpBUykgWLUYCkr2kfqMN9gHm2FQRQ52RKGKbHnJg18cW8SR-Va4C_CxgvWhRibt_gthUzviqzZOQTXLhRt419oiC1QuZ9xX4QFezFxDDfZBeRhBUbJnw5bii9kotdHG2PlNKR0AbeNV_UfmwingQw7ZXrAYu9PHU8h4yD5xAZs-g9XZK0pdf6aBwbERQmVhUPxr6I-5t2D3uCALI3lX0XhYWn"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+              </div>
+              <div class="flex flex-col flex-1 p-6 justify-between gap-4">
+                <h3 class="font-headline-md text-headline-md font-bold text-on-surface group-hover:text-success-emerald transition-colors">Sinh học</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Di truyền phân tử, sinh thái học & ôn luyện HSG Quốc Gia.</p>
+                <div class="inline-flex items-center justify-between w-full pt-3 font-label-md text-label-md font-bold text-success-emerald">
+                  <span>Vào ôn tập môn Sinh</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- 5. Ngữ văn -->
+            <a href="detail.html" class="group flex flex-col rounded-2xl bg-surface-container overflow-hidden shadow-lg hover:shadow-[0_16px_36px_rgba(244,63,94,0.25)] hover:-translate-y-2 transition-all duration-300">
+              <div class="relative h-48 w-full overflow-hidden">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Ngữ văn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiTDcAs--zdtDdEPkCKfEzv40aK34oTacN8ErPIhVK-1lul5CjoSpNhUxxzfVr_nC6F_WQbdWb19ISavn9HR2PZLoLeDeicrPXdztuVl4Qw2e4zZQYcHgddJ2hQXA76Ov5wlZV198dwn1ZcuHRbiJ8h2WpMtorPZ6ayJT-EpQTuxt5fRBGc-ULwXJYuCmFsD1U6Ub1o7I7uHtexQ3hFAT5shEIQNQQGA5bhkU2FlcP"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+              </div>
+              <div class="flex flex-col flex-1 p-6 justify-between gap-4">
+                <h3 class="font-headline-md text-headline-md font-bold text-on-surface group-hover:text-danger-rose transition-colors">Ngữ văn</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Nghị luận văn học, lý luận văn học & chiều sâu tác phẩm.</p>
+                <div class="inline-flex items-center justify-between w-full pt-3 font-label-md text-label-md font-bold text-danger-rose">
+                  <span>Vào ôn tập môn Văn</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- 6. Tiếng Anh -->
+            <a href="detail.html" class="group flex flex-col rounded-2xl bg-surface-container overflow-hidden shadow-lg hover:shadow-[0_16px_36px_rgba(37,99,235,0.35)] hover:-translate-y-2 transition-all duration-300">
+              <div class="relative h-48 w-full overflow-hidden">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Tiếng Anh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNXLWkswDVDP7-q-fRSwToo4bZJHuIZ9bdggSBn9SxEJ4ix7AghM6GVsZcOjqtGxVY6fz4ba7NJqXjdwMvzyafpb7QEyObWeGWt8DgCUZMl62d5VEA1ozGLvlrYm0eT07-Wzl0VJca-0T9s3KTfuYrmWTWyHv1IC6k9UTBQTulbqB_4QtXZ0oL4vkoH0Fn856_yUgOqDk_yQfAEZEwszePQRmDrpv-kRPw9HSsDEff"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+              </div>
+              <div class="flex flex-col flex-1 p-6 justify-between gap-4">
+                <h3 class="font-headline-md text-headline-md font-bold text-on-surface group-hover:text-secondary transition-colors">Tiếng Anh</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Ngữ pháp nâng cao, từ vựng C1/C2 IELTS & bài đọc hiểu HSG Quốc gia.</p>
+                <div class="inline-flex items-center justify-between w-full pt-3 font-label-md text-label-md font-bold text-secondary">
+                  <span>Vào ôn tập môn Anh</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIVE INTERACTIVE QUIZ SPOTLIGHT -->
+      <section class="w-full py-12 scroll-mt-24" id="interactive-quiz">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+          <div class="relative rounded-3xl bg-surface-container-low p-6 lg:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+            <div class="relative z-10 flex flex-col gap-8">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-surface-variant/30">
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold">
+                    OLYMPIC TOÁN HỌC 2025
+                  </span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Chuyên đề: Số học & Đồng dư thức</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high text-streak-gold shadow-inner font-mono font-bold">
+                    <span class="material-symbols-outlined text-[18px]">timer</span>
+                    <span class="font-headline-sm text-headline-sm" id="quiz-timer">04:48</span>
+                  </div>
+                  <div class="px-3 py-2 rounded-xl bg-surface-container-high font-label-md text-label-md font-bold text-on-surface">
+                    Câu 06 / 10
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question Box -->
+              <div class="p-6 lg:p-8 rounded-2xl bg-surface-container flex flex-col gap-6 shadow-md">
+                <h4 class="font-headline-md text-headline-md font-bold text-on-surface leading-snug">
+                  Cho số nguyên dương $n \ge 2$. Ký hiệu $p$ là ước nguyên tố nhỏ nhất của $n$. Giả sử $n - p = 2024$. Hỏi có bao nhiêu giá trị nguyên dương $n$ thỏa mãn điều kiện bài toán?
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2" id="options-container">
+                  <button class="option-card flex items-center gap-4 p-4 rounded-xl bg-surface-container-high hover:bg-surface-variant text-left transition-all active:scale-[0.99] group shadow-sm" onclick="selectOption(this, 'A')">
+                    <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center font-bold text-on-surface-variant">A</div>
+                    <div><span class="font-headline-sm font-semibold text-on-surface">1 giá trị</span><p class="text-xs text-on-surface-variant">Duy nhất n = 2026</p></div>
+                  </button>
+                  <button class="option-card flex items-center gap-4 p-4 rounded-xl bg-surface-container-high hover:bg-surface-variant text-left transition-all active:scale-[0.99] group shadow-sm" onclick="selectOption(this, 'B')">
+                    <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center font-bold text-on-surface-variant">B</div>
+                    <div><span class="font-headline-sm font-semibold text-on-surface">2 giá trị</span><p class="text-xs text-on-surface-variant">n = 2026 và một số lẻ</p></div>
+                  </button>
+                  <button class="option-card flex items-center gap-4 p-4 rounded-xl bg-surface-container-high hover:bg-surface-variant text-left transition-all active:scale-[0.99] group shadow-sm" onclick="selectOption(this, 'C')">
+                    <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center font-bold text-on-surface-variant">C</div>
+                    <div><span class="font-headline-sm font-semibold text-on-surface">4 giá trị</span><p class="text-xs text-on-surface-variant">Phân tích thừa số nguyên tố</p></div>
+                  </button>
+                  <button class="option-card flex items-center gap-4 p-4 rounded-xl bg-surface-container-high hover:bg-surface-variant text-left transition-all active:scale-[0.99] group shadow-sm" onclick="selectOption(this, 'D')">
+                    <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center font-bold text-on-surface-variant">D</div>
+                    <div><span class="font-headline-sm font-semibold text-on-surface">Vô số giá trị</span><p class="text-xs text-on-surface-variant">Dựa trên Dirichlet</p></div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  
+  <!-- MASTER FOOTER -->
+  <footer class="w-full bg-surface-container-lowest mt-space-xl relative z-10 shadow-[0_-1px_20px_rgba(0,0,0,0.5)] border-t border-surface-container-high/60">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div class="lg:col-span-2 flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <img alt="StudyBuddy Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjligjSlPEi_1AAFqCLNdEnKGxpK0jpoVuH3p7dewafzcqmwNSy3H3YDp8b8JieGoRfcXgz1GRwtEJxC9_2WuQ3Pn99W3S4KrIo7_KM3VKyDqu85s-kzONjgqrVi9wFqJyPR5C69aoUAct1XHhIjV0m57JwKbwl1zwH64JbQL8Q2UOv9FOzqoiCicM-5eITFSNSK4KYCp7W1dQ50EmXW1D-KO29m4_xYRlU6facvoW"/>
+            <span class="font-headline-sm text-headline-sm font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">StudyBuddy</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+            Nền tảng tri thức và luyện thi chuyên sâu dành cho học sinh THPT Chuyên toàn quốc. Rèn luyện tư duy, giao lưu học thuật và đột phá kỳ thi học sinh giỏi.
+          </p>
+          <div class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">mail</span><span>support@studybuddy.edu.vn</span></div>
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-secondary">call</span><span>1900 8989 (08:00 - 21:00)</span></div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Cộng Đồng Chuyên</span>
+          <div class="flex flex-col gap-2.5 font-body-md text-body-md text-on-surface-variant">
+            <a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="material-symbols-outlined text-[18px]">groups</span>Group THPT Chuyên</a>
+            <a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="material-symbols-outlined text-[18px]">chat</span>Discord Hub</a>
+            <a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="material-symbols-outlined text-[18px]">send</span>Kênh Telegram</a>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Tài Nguyên</span>
+          <div class="flex flex-col gap-2.5 font-body-md text-body-md text-on-surface-variant">
+            <a class="hover:text-secondary transition-colors" href="detail.html#section-quiz">Đề thi HSG Quốc gia</a>
+            <a class="hover:text-secondary transition-colors" href="detail.html">Chuyên đề Toán - Lý - Hóa</a>
+            <a class="hover:text-secondary transition-colors" href="index.html#interactive-quiz">Luyện đề Duyên Hải</a>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <span class="font-headline-sm text-headline-sm font-bold text-on-surface">Nhận Đề Thi Mới</span>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Cập nhật bộ đề thi chuyên và gợi ý giải độc quyền hàng tuần.</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2 p-1 rounded-xl bg-surface-container-high shadow-inner">
+              <input class="w-full px-3 py-1.5 bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Email học sinh..." type="email"/>
+              <button class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-md text-label-md font-bold hover:brightness-110 shadow-sm" onclick="showToast('Đã đăng ký nhận đề mới!', 'success')">
+                <span class="material-symbols-outlined text-[16px]">send</span>
+              </button>
+            </div>
+            <span class="font-label-sm text-label-sm text-outline">Không spam. Hủy đăng ký bất kỳ lúc nào.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-body-sm text-body-sm text-on-surface-variant border-t border-surface-container-high/40">
+        <p>© 2025 StudyBuddy. Đã đăng ký bản quyền. Nền tảng học tập THPT Chuyên.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING CHATBOT WIDGET -->
+  <div class="hidden fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[410px] max-h-[580px] h-[540px] flex-col rounded-3xl bg-surface-container-low/95 backdrop-blur-2xl border border-primary/30 shadow-[0_20px_60px_rgba(124,58,237,0.4)] overflow-hidden transition-all duration-300 chat-popup-animate" id="chatbot-popup">
+    <div class="p-4 bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high border-b border-white/10 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="relative w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-on-primary shadow-md">
+          <span class="material-symbols-outlined text-[20px]">smart_toy</span>
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-success-emerald ring-2 ring-surface"></span>
+        </div>
+        <div class="flex flex-col text-left">
+          <div class="flex items-center gap-2">
+            <span class="font-headline-sm text-headline-sm font-bold text-on-surface text-[15px] leading-tight">StudyBuddy AI Tutor</span>
+            <span class="px-2 py-0.5 rounded-full bg-primary-container/40 text-primary font-label-sm text-[10px] font-bold">HSG PRO</span>
+          </div>
+          <span class="font-label-sm text-[11px] text-success-emerald flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-success-emerald animate-ping"></span> Sẵn sàng giải đáp 24/7
+          </span>
+        </div>
+      </div>
+      <div class="flex items-center gap-1">
+        <button class="p-1.5 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-colors" onclick="clearChatMessages()" title="Làm mới chat">
+          <span class="material-symbols-outlined text-[18px]">refresh</span>
+        </button>
+        <button aria-label="Đóng Chatbot" class="p-1.5 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-colors" id="close-chat-btn">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex-1 p-4 overflow-y-auto flex flex-col gap-3 text-left" id="chat-messages">
+      <div class="flex items-start gap-2.5 max-w-[88%]">
+        <div class="w-7 h-7 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary text-xs font-bold mt-1">AI</div>
+        <div class="p-3 rounded-2xl rounded-tl-sm bg-surface-container-high border border-white/5 text-on-surface font-body-sm text-[13px] leading-relaxed shadow-sm">
+          Chào <strong>Minh Anh</strong>! 👋 Mình là trợ lý AI chuyên bồi dưỡng học sinh giỏi THPT Chuyên. Bạn đang gặp bài toán khó hay cần tài liệu chuyên sâu nào hôm nay?
+        </div>
+      </div>
+      <div class="flex flex-col gap-1.5 pt-1 pl-9">
+        <span class="font-label-sm text-[11px] text-on-surface-variant font-semibold">Gợi ý câu hỏi nhanh:</span>
+        <div class="flex flex-wrap gap-1.5">
+          <button class="px-2.5 py-1 rounded-lg bg-surface-container text-electric-cyan text-[11px] font-medium border border-electric-cyan/30 hover:bg-electric-cyan/15 transition-all text-left" onclick="sendQuickPrompt('Gợi ý tài liệu ôn VMO 2025')">
+            ⚡ Gợi ý tài liệu ôn VMO
+          </button>
+          <button class="px-2.5 py-1 rounded-lg bg-surface-container text-secondary text-[11px] font-medium border border-secondary/30 hover:bg-secondary/15 transition-all text-left" onclick="sendQuickPrompt('Phương pháp giải BĐT Cauchy-Schwarz dạng Engel')">
+            📐 Phương pháp Cauchy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-3 bg-surface-container border-t border-white/10">
+      <form class="flex items-center gap-2" id="chat-form" onsubmit="handleUserChat(event)">
+        <input class="flex-1 bg-surface-container-high text-on-surface placeholder:text-outline font-body-sm text-[13px] px-3.5 py-2.5 rounded-xl border border-white/5 focus:outline-none focus:border-primary transition-all" id="chat-input" placeholder="Hỏi AI bài tập, định lý, công thức..." type="text"/>
+        <button class="p-2.5 rounded-xl bg-gradient-to-r from-primary-container to-secondary-container text-on-primary hover:brightness-110 active:scale-95 transition-all shadow-md flex items-center justify-center" type="submit">
+          <span class="material-symbols-outlined text-[18px]">send</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Trigger Button -->
+  <div class="fixed bottom-6 right-4 sm:right-6 z-40 group">
+    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-primary-container via-electric-cyan to-secondary-container blur-md opacity-75 group-hover:opacity-100 animate-pulse transition duration-300"></div>
+    <button aria-label="Mở StudyBuddy AI Tutor" class="relative flex items-center gap-3 h-14 px-4 sm:px-5 rounded-full bg-surface-container-high shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-all text-on-surface border border-white/10" id="chatbot-toggle-btn">
+      <div class="relative flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary text-on-primary font-bold shadow-inner">
+        <span class="material-symbols-outlined text-[20px]" id="chatbot-icon">smart_toy</span>
+      </div>
+      <div class="flex flex-col text-left">
+        <span class="font-label-sm text-label-sm text-electric-cyan font-bold leading-none">ONLINE</span>
+        <span class="font-label-md text-label-md font-bold leading-tight">StudyBuddy AI Tutor</span>
+      </div>
+    </button>
+  </div>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
